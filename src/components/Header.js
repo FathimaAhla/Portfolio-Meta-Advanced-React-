@@ -32,7 +32,11 @@ const socials = [
   },
 ];
 
+
 const Header = () => {
+
+  const headerRef = useRef(null); 
+
   const handleClick = (anchor) => () => {
     const id = `${anchor}-section`;
     const element = document.getElementById(id);
@@ -55,6 +59,7 @@ const Header = () => {
       transitionDuration=".3s"
       transitionTimingFunction="ease-in-out"
       backgroundColor="#18181b"
+      ref={headerRef} 
     >
       <Box color="white" maxWidth="1280px" margin="0 auto">
         <HStack
@@ -64,11 +69,24 @@ const Header = () => {
           alignItems="center"
         >
           <nav>
-            {/* Add social media links based on the `socials` data */}
+          <HStack spacing={8}>
+            {socials.map((social, index) => (
+            
+              <a key={index} href={social.url} target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={social.icon} size="2x" />
+              </a>
+            ))}
+              </HStack>
+
           </nav>
           <nav>
             <HStack spacing={8}>
-              {/* Add links to Projects and Contact me section */}
+            <a href="#projects" onClick={handleClick("projects")}> 
+               Projects 
+             </a> 
+             <a href="#contact-me" onClick={handleClick("contact-me")}> 
+             Contact-me 
+             </a> 
             </HStack>
           </nav>
         </HStack>
